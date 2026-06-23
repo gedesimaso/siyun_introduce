@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+@config "../tailwind.config.ts";
+
+@layer base {
+  :root {
+    --background: 315 25% 98%; /* #fcf8fb */
+    --foreground: 240 4% 11%; /* #1b1b1d */
+    --card: 320 12% 94%; /* #f0edef */
+    --card-foreground: 240 4% 11%;
+    --popover: 320 12% 94%;
+    --popover-foreground: 240 4% 11%;
+    --primary: 211 100% 31%; /* #004e9f */
+    --primary-foreground: 0 0% 100%; /* #ffffff */
+    --secondary: 206 100% 33%; /* #0060aa */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 300 6% 91%; /* #eae7ea */
+    --muted-foreground: 220 12% 29%; /* #414753 */
+    --accent: 300 6% 91%;
+    --accent-foreground: 240 4% 11%;
+    --destructive: 0 75% 42%; /* #ba1a1a */
+    --destructive-foreground: 0 0% 100%;
+    --border: 223 7% 48%; /* #727784 */
+    --input: 223 7% 48%;
+    --ring: 211 100% 31%;
+    --radius: 0.5rem;
+  }
+}
+
+body {
+    background-color: theme('colors.surface-bright');
+    font-family: theme('fontFamily.body');
+    -webkit-font-smoothing: antialiased;
+    min-height: max(884px, 100dvh);
+}
+.exhibit-still {
+    box-shadow: rgba(0,0,0,0.22) 3px 5px 30px;
+}
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background-color: theme('colors.primary');
+    z-index: 100;
+    width: 0%;
+    transition: width 0.1s ease-out;
+}
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

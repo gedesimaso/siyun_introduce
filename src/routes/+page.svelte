@@ -3,6 +3,8 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
 
+	let { data }: { data: import('./$types').PageData } = $props();
+
 	let progressBar: HTMLElement;
 
 	onMount(() => {
@@ -55,6 +57,7 @@
 		<a class="font-body-strong text-body-strong text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200" href="#pen">The Pen</a>
 		<a class="font-body-strong text-body-strong text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200" href="#machine">The Machine</a>
 		<a class="font-body-strong text-body-strong text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200" href="#platform">The Platform</a>
+		<a class="font-body-strong text-body-strong text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200" href="/blog">Blog</a>
 	</nav>
 	<div class="flex items-center gap-md">
 		<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform">search</span>
@@ -186,6 +189,51 @@
 		</div>
 	</section>
 
+	<!-- 04 LATEST WRITINGS (Blog Integration) -->
+	<section class="bg-surface-bright py-section-v border-t border-hairline" id="blog-preview">
+		<div class="max-w-content-max mx-auto px-lg">
+			<div class="mb-section-v flex justify-between items-end">
+				<div>
+					<span class="font-eyebrow text-eyebrow text-on-surface-variant mb-sm block">04 / RECENT WRITINGS</span>
+					<h2 class="font-display-lg text-display-lg text-on-surface max-w-measure leading-relaxed">
+						최근 발행된 글
+					</h2>
+				</div>
+				<a href="/blog" class="hidden md:inline-flex items-center gap-2 text-primary hover:opacity-80 transition-opacity font-body-strong">
+					블로그 전체 보기 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+				</a>
+			</div>
+
+			<div class="grid md:grid-cols-3 gap-md">
+				{#each data.recentPosts as post}
+					<a href="/blog/{post.id}" class="group block bg-surface-container-low hover:bg-surface-container-high transition-colors p-6 rounded-2xl border border-outline/10">
+						<time class="text-xs text-outline mb-3 block font-mono">
+							{new Date(post.createdAt).toLocaleDateString('ko-KR')}
+						</time>
+						<h3 class="font-display-md text-xl mb-3 group-hover:text-primary transition-colors line-clamp-2">
+							{post.title}
+						</h3>
+						<p class="text-sm text-outline-variant line-clamp-3 leading-relaxed">
+							{post.content}
+						</p>
+					</a>
+				{/each}
+				
+				{#if data.recentPosts.length === 0}
+					<div class="col-span-3 py-12 text-center text-outline bg-surface-container-low rounded-2xl border border-outline/10">
+						아직 작성된 글이 없습니다.
+					</div>
+				{/if}
+			</div>
+			
+			<div class="mt-8 text-center md:hidden">
+				<a href="/blog" class="inline-flex items-center gap-2 text-primary hover:opacity-80 transition-opacity font-body-strong">
+					블로그 전체 보기 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+				</a>
+			</div>
+		</div>
+	</section>
+
 	<!-- Contact Section -->
 	<section class="bg-canvas-light py-hero-v">
 		<div class="max-w-measure mx-auto px-lg text-center">
@@ -203,6 +251,7 @@
 <footer class="w-full py-section-v px-lg flex flex-col items-center gap-md bg-surface-container-highest border-t border-hairline">
 	<div class="font-display-md text-display-md font-semibold text-on-surface">Writer.</div>
 	<div class="flex gap-lg">
+		<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="/blog">Blog</a>
 		<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Email</a>
 		<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">LinkedIn</a>
 		<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">GitHub</a>

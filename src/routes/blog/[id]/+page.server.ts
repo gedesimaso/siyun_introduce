@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { Marked } from 'marked';
-import markedHighlight from 'marked-highlight';
+import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	}
 
 	const marked = new Marked(
-		markedHighlight.markedHighlight({
+		markedHighlight({
 			langPrefix: 'hljs language-',
 			highlight(code, lang) {
 				const language = hljs.getLanguage(lang) ? lang : 'plaintext';

@@ -24,6 +24,19 @@ export const load: PageServerLoad = async ({ params }) => {
 		})
 	);
 
+	marked.use({
+		renderer: {
+			link(token) {
+				const href = token.href;
+				const ytMatch = href?.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+				if (ytMatch) {
+					return `<div class="aspect-video w-full my-6 shadow-md rounded-xl overflow-hidden"><iframe class="w-full h-full" src="https://www.youtube.com/embed/${ytMatch[1]}" frameborder="0" allowfullscreen></iframe></div>`;
+				}
+				return false;
+			}
+		}
+	});
+
 	const parsedContent = await marked.parse(post.content);
 
 	return { 
